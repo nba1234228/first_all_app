@@ -1,0 +1,117 @@
+{
+    "name": "first_all_web",
+    "version": "1.0.0",
+    "description": "design front end",
+    "main": "electron.js",
+    "scripts": {
+        "app_navBar:copy": "node tool/copy.js ./src/config/navBar_app.scss ./src/core/navBar.scss",
+        "web_navBar:copy": "node tool/copy.js ./src/config/navBar_web.scss ./src/core/navBar.scss",
+        "dev:copy": "node tool/copy.js ./env/dev.js ./src/core/env.js",
+        "lint": "eslint --ext .js,.vue src",
+        "lint-fix": "eslint --fix --ext .js,.jsx,.vue src/",
+        "test": "karma start test/karma.conf.js",
+        "vuex:generate": "node tool/vuex_generate.js ./src/vuex ./src/generate/store.js",
+        "router:generate": "node tool/router_generate.js ./src/pages ./src/generate/route.js",
+        "app_serve": "npm run vuex:generate && npm run router:generate && npm run app_navBar:copy && npm run dev:copy && cross-env NODE_ENV=development webpack-dev-server --config vue.config.js",
+        "web_serve": "npm run vuex:generate && npm run router:generate && npm run web_navBar:copy && npm run dev:copy && cross-env NODE_ENV=development webpack-dev-server --config vue.config.js",
+        "app_build": "npm run app_navBar:copy && cross-env NODE_ENV=production webpack --config vue.config.js",
+        "web_build": "npm run web_navBar:copy && cross-env NODE_ENV=production webpack --config vue.config.js",
+        "electron:copy": "node tool/copy.js ./src/electron/electron.js dist/electron.js && node copy.js package.json dist/package.json",
+        "electron:build": "npm run web_build && npm run electron:copy && electron-builder --win --x64"
+    },
+    "build": {
+        "productName": "lucky",
+        "appId": "com.fafa.xyz",
+        "copyright": "@2019",
+        "directories": {
+            "output": "dist/build"
+        },
+        "win": {
+            "icon": "./assets/imgs/logo.png",
+            "target": [
+                "nsis",
+                "zip"
+            ]
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitee.com/chengzhengfa/first_all_web.git"
+    },
+    "author": "fage",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.0",
+        "babel-cli": "^6.26.0",
+        "babel-loader": "^7.1.5",
+        "clean-webpack-plugin": "^3.0.0",
+        "cross-env": "^6.0.0",
+        "css-loader": "^3.2.0",
+        "fastclick": "^1.0.6",
+        "file-loader": "^4.2.0",
+        "html-webpack-plugin": "^3.2.0",
+        "mini-css-extract-plugin": "^0.8.0",
+        "node-sass": "^4.12.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "qrcodejs2": "0.0.2",
+        "sass": "^1.22.12",
+        "sass-loader": "^8.0.0",
+        "style-loader": "^1.0.0",
+        "terser-webpack-plugin": "^2.1.0",
+        "url-loader": "^2.1.0",
+        "vant": "^2.2.9",
+        "vue": "^2.6.10",
+        "vue-loader": "^15.7.1",
+        "vue-qr": "^2.1.0",
+        "vue-router": "^3.1.3",
+        "vue-template-compiler": "^2.6.10",
+        "vuex": "^3.1.1",
+        "webpack": "^4.40.2",
+        "webpack-cli": "^3.3.9",
+        "webpack-dev-server": "^3.8.1"
+    },
+    "devDependencies": {
+        "autoprefixer": "^9.7.1",
+        "babel-eslint": "^10.0.3",
+        "babel-plugin-syntax-jsx": "^6.18.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-plugin-transform-vue-jsx": "^3.7.0",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-stage-2": "^6.24.1",
+        "chai": "^4.2.0",
+        "electron": "^7.0.1",
+        "electron-builder": "^22.1.0",
+        "es6-promise": "^4.2.8",
+        "eslint": "^6.6.0",
+        "eslint-config-standard": "^14.1.0",
+        "eslint-friendly-formatter": "^4.0.1",
+        "eslint-loader": "^3.0.2",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-node": "^10.0.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.1",
+        "eslint-plugin-vue": "^6.0.0",
+        "karma": "^4.4.1",
+        "karma-chai": "^0.1.0",
+        "karma-chrome-launcher": "^3.1.0",
+        "karma-cli": "^2.0.0",
+        "karma-coverage": "^2.0.1",
+        "karma-mocha": "^1.3.0",
+        "karma-webpack": "^4.0.2",
+        "mocha": "^6.2.2",
+        "postcss-import": "^12.0.1",
+        "postcss-loader": "^3.0.0",
+        "watchify": "^3.11.1",
+        "webpack-bundle-analyzer": "^3.6.0"
+    },
+    "engines": {
+        "node": ">= 6.0.0",
+        "npm": ">= 3.0.0"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
+}

@@ -1,0 +1,7 @@
+/build/
+/config/
+/dist/
+/*.js
+/src/generate/*.js
+/src/vuex/*/index.js
+/src/assets/css/iconfont/
